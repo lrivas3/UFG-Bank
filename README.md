@@ -109,7 +109,7 @@ Para correr el proyecto localmente, ejecuta el siguiente comando:
 ```bash
   dotnet run
 ```
-estando en la carpeta del proyecto que contiene el achivo `UFG-Bank-ATM.csproj`
+estando en la carpeta del proyecto que contiene el achivo `UFGBank.csproj`
 
 ## Feedback
 
