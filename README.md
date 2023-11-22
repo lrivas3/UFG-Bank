@@ -60,7 +60,7 @@ Para restaurar las tablas de la base de datos del proyecto necesitarás dotnet-e
 Si no tienes las herramienta puedes instalarla en windows con el siguiente comando:
 
 ```bash
-  dotnet tool install --global dotnet-ef
+dotnet tool install --global --version 7 dotnet-ef
 ```
 
 
