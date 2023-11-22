@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UFGBank.Areas.Identity.Data;
+using UFGBank.Models;
 
 namespace UFGBank.Data;
 
@@ -12,6 +13,8 @@ public class UFGBankDbContext : IdentityDbContext<UFGBankUser>
     {
     }
 
+    public DbSet<UFGBankUser> AspNetUsers { get; set; }
+    public DbSet<Transaction> Transactions { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
