@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("UFGBankDbContextConnection") ?? throw new InvalidOperationException("Connection string 'UFGBankDbContextConnection' not found.");
 
 builder.Services.AddDbContext<UFGBankDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseMySQL(connectionString));
 
 builder.Services.AddDefaultIdentity<UFGBankUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<UFGBankDbContext>();
