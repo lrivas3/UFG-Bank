@@ -8,7 +8,7 @@ var connectionString = builder.Configuration.GetConnectionString("UFGBankDbConte
 builder.Services.AddDbContext<UFGBankDbContext>(options =>
     options.UseMySQL(connectionString));
 
-builder.Services.AddIdentity<UFGBankUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<UFGBankUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<UFGBankDbContext>()
     .AddDefaultTokenProviders()
     .AddDefaultUI();
@@ -17,6 +17,15 @@ builder.Services.AddIdentity<UFGBankUser, IdentityRole>(options => options.SignI
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 4;
+});
 
 var app = builder.Build();
 

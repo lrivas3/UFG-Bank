@@ -11,9 +11,9 @@ namespace UFGBank.Areas.Identity.Data;
 public class UFGBankUser : IdentityUser
 {
     
-    [Required] public string FirstName { get; set; }
+    [Required] public string FirstName { get; set; } = null!;
 
-    [Required] public string LastName { get; set; }
+    [Required] public string LastName { get; set; } = null!;
 
     [Required]
     [DataType(DataType.Currency)]

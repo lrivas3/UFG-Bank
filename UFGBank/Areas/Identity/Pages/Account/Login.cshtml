@@ -10,7 +10,6 @@
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
@@ -36,13 +35,13 @@
                 </div>
                 <div>
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Olvidaste tu PIN?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrar usuario nuevo</a>
                     </p>
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Reenviar Email de confirmacion</a>
                     </p>
                 </div>
             </form>
@@ -50,15 +49,23 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h3>Use another service to log in.</h3>
+            <h3>UFG Bank Login</h3>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            <h4>¡Bienvenido al cajero automático de UFG Bank!</h4>
+                            
+                            <br/>
+                            <br/>
+
+                            Por favor, introduce tu correo y numero de PIN para acceder a tu cuenta. Recuerda proteger tu información personal y no compartir tu PIN con nadie.
+
+                            Tu seguridad es nuestra prioridad. Verifica siempre la autenticidad de la máquina y asegúrate de cerrar la sesión al finalizar tu transacción.
+
+                            ¡Gracias por confiar en nosotros!
                         </p>
                     </div>
                 }
