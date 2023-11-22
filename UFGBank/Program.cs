@@ -8,8 +8,10 @@ var connectionString = builder.Configuration.GetConnectionString("UFGBankDbConte
 builder.Services.AddDbContext<UFGBankDbContext>(options =>
     options.UseMySQL(connectionString));
 
-builder.Services.AddDefaultIdentity<UFGBankUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<UFGBankDbContext>();
+builder.Services.AddIdentity<UFGBankUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<UFGBankDbContext>()
+    .AddDefaultTokenProviders()
+    .AddDefaultUI();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -39,5 +41,38 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+//seed roles
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roles = new[] { "Admin", "User" };
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<UFGBankUser>>();
+    string email = "admin@admin.com";
+    string password = "P32ADdj1ejj2#!";
+    if (await userManager.FindByEmailAsync(email) == null)
+    {
+        var user = new UFGBankUser();
+        user.UserName = email;
+        user.FirstName = "Admin";
+        user.LastName = "Admin";
+        user.Email = email;
+        
+        await userManager.CreateAsync(user, password);
+        
+        await userManager.AddToRoleAsync(user, "Admin");
+    }
+}
 
 app.Run();
